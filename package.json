@@ -1,0 +1,15 @@
+{
+    "name": "world",
+    "version": "0.0.1",
+    "private": true,
+    "description": "",
+    "author": "fox",
+    "scripts": {
+        "dev": "turbo run dev",
+        "build": "turbo run build"
+    },
+    "license": "ISC",
+    "devDependencies": {
+        "turbo": "^1.13.3"
+    }
+}
