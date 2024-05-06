@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
+import { PostRepository } from './post.repository';
 import { DatasourceModule } from './datasource.module';
-import { UserRepository } from './user.repository';
 
 @Module({
   imports: [DatasourceModule],
   providers: [
-    UserRepository,
+    PostRepository,
   ],
-  exports: [UserRepository],
+  exports: [PostRepository],
 })
-export class UserModule { }
+export class PostModule {}

@@ -1,7 +1,9 @@
 import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { User } from './user.entity';
+import { Post as PostT } from './post.entity';
 import { UserRepository } from './user.repository';
+import { PostRepository } from './post.repository';
 
 @Controller()
 export class AppController {
@@ -9,7 +11,10 @@ export class AppController {
   private appService: AppService;
 
   @Inject()
-  private userservice: UserRepository;
+  private userRepository: UserRepository;
+
+  @Inject()
+  private postRepository: PostRepository;
 
   @Get()
   getHello(): string {
@@ -18,12 +23,21 @@ export class AppController {
 
   @Get('/alluser')
   async getAllUser(): Promise<User[]> {
-    console.log('12');
-    return await this.userservice.findAll();
+    return await this.userRepository.findAll();
   }
 
-  @Post('/adduser')
+  @Post('/addser')
   async addNewUser(@Body() user: User): Promise<User> {
-    return await this.userservice.addUser(user);
+    return await this.userRepository.addUser(user);
+  }
+
+  @Get('/allpost')
+  async getAllPost(): Promise<PostT[]> {
+    return await this.postRepository.findAll();
+  }
+
+  @Post('/addpost')
+  async addNewPost(@Body() post: PostT): Promise<PostT> {
+    return await this.postRepository.addPost(post);
   }
 }

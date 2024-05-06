@@ -5,13 +5,13 @@ import { User } from './user.entity';
 @Injectable()
 export class UserRepository {
     @Inject('USER_REPOSITORY')
-    private userRepository: Repository<User>;
+    private repository: Repository<User>;
 
     async findAll(): Promise<User[]> {
-        return this.userRepository.find();
+        return this.repository.find();
     }
 
     async addUser(user: User): Promise<User> {
-        return this.userRepository.save(user);
+        return this.repository.save(user);
     }
 }
