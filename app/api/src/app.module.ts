@@ -1,21 +1,24 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UserModule } from './user.module';
-import { PostModule } from './post.module';
-// import { GraphQLModule } from '@nestjs/graphql';
-// import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-// import { join } from 'path';
+import { UserModule } from './user/user.module';
+import { PostModule } from './post/post.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [UserModule, PostModule,
-    // GraphQLModule.forRoot<ApolloDriverConfig>({
-    //   driver: ApolloDriver,
-    //   autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'fox',
+      password: '123456',
+      database: 'shiyu-db',
+      entities: ['dist/**/*.entity.js'],
+      // TODO: Setting synchronize: true shouldn't be used in production - otherwise you can lose production data.
+      synchronize: true,
+    }),
 
-    // }),
+    UserModule,
+    PostModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
